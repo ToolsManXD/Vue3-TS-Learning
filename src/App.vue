@@ -1,18 +1,28 @@
 <template>
   <div class="container">
+    <!-- 头部 -->
     <global-header :user="user"></global-header>
+
+    <!-- 专栏列表 -->
     <column-list :list="list"></column-list>
+
+    <!-- 登录表单 -->
     <validate-form @form-submit="onFormSubmit">
+
+      <!-- 表单内容 -->
       <div class="mb-3">
         <label class="form-lable">邮箱地址</label>
         <validate-input ref="inputRef" :rules="emailRules" v-model="emailVal" placeholder="请输入电子邮箱地址"></validate-input>
         <label class="form-lable">密码</label>
         <validate-input :rules="passwordRules" type="password" ref="inputRef" placeholder="请输入密码"></validate-input>
       </div>
+
+      <!-- 提交按钮 -->
       <template #submit>
         <span class="btn btn-danger">Submit</span>
       </template>
     </validate-form>
+
   </div>
 </template>
 
@@ -72,6 +82,8 @@ export default defineComponent({
     const passwordRules : RulesProp = [
       { type: 'password', message: '请输入正确密码' }
     ]
+
+    // 表单验证结果
     const onFormSubmit = (result:boolean) => {
       console.log('result', result)
     }

@@ -39,13 +39,13 @@ export default defineComponent({
       err: false,
       message: ''
     })
-
+    // 利用特定 prop 和自定义事件 给子组件绑定v-model向父组件传值
     const updateValue = (e:KeyboardEvent) => {
       const targetValue = (e.target as HTMLInputElement).value
       inputRef.val = targetValue
       context.emit('update:modelValue', targetValue)
     }
-
+    // 子组件接受父组件的prop ‘rules’进行输入合法性判断
     const validateInput = () => {
       if (props.rules) {
         const allPassed = props.rules.every(rule => {
@@ -75,7 +75,7 @@ export default defineComponent({
 
       return true
     }
-
+    // 每个ValidateInput组件中的输入合法验证结果以自定义事件方式传递出去
     onMounted(() => {
       emitter.emit('formItemCreated', validateInput)
     })
