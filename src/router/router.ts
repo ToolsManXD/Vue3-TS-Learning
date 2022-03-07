@@ -11,7 +11,8 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta: { redirectAlreadyLogin: true }
   },
   {
     path: '/columnDetail',
@@ -21,7 +22,8 @@ const routes = [
   {
     path: '/create',
     name: 'createPost',
-    component: CreatePost
+    component: CreatePost,
+    meta: { requiredLogin: true }
   }
 ]
 
