@@ -14,10 +14,11 @@
 </template>
 
 <script lang = "ts">
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
-import { testData, testPosts } from '../testData'
 import PostList from '../components/PostList.vue'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '@/store/store'
 export default defineComponent({
   components: {
     PostList
@@ -25,22 +26,24 @@ export default defineComponent({
   setup () {
     const route = useRoute()
     const currentId = +route.params.id
-    const colArr = testData.find(c => c.id === currentId)
-    const setColumn = () => {
-      if (colArr) {
-        const column = colArr
-        return column
-      } else {
-        return {
-          id: 0,
-          title: '404',
-          description: '404',
-          avatar: '404'
-        }
-      }
-    }
-    const column = setColumn()
-    const list = testPosts.filter(post => post.columnId === currentId)
+    const store = useStore<GlobalDataProps>()
+    // const colArr = testData.find(c => c.id === currentId)
+    // const setColumn = () => {
+    //   if (colArr) {
+    //     const column = colArr
+    //     return column
+    //   } else {
+    //     return {
+    //       id: 0,
+    //       title: '404',
+    //       description: '404',
+    //       avatar: '404'
+    //     }
+    //   }
+    // }
+    // const column = setColumn()
+    const column = computed(() => store.getters.getColumnById(currentId))
+    const list = computed(() => store.getters.getPostsByCid(currentId))
     return {
       column,
       list

@@ -1,6 +1,7 @@
 import Home from '../views/homeView.vue'
 import Login from '../views/loginView.vue'
 import ColumnDetail from '../views/columnDetail.vue'
+import CreatePost from '../views/createPost.vue'
 const routes = [
   {
     path: '/',
@@ -16,6 +17,11 @@ const routes = [
     path: '/columnDetail',
     name: 'columnDetail',
     component: ColumnDetail
+  },
+  {
+    path: '/create',
+    name: 'createPost',
+    component: CreatePost
   }
 ]
 
